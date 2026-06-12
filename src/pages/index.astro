@@ -1,0 +1,187 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const [games, concepts, questions] = await Promise.all([
+  getCollection("games"),
+  getCollection("concepts"),
+  getCollection("questions"),
+]);
+
+const starterLinks = [
+  { href: "/games/ev-take-or-pass", label: "EV: Take or Pass", meta: "Warm up with quick value decisions" },
+  { href: "/questions/dice-ev-take-or-pass", label: "Dice EV: Should You Take the Bet?", meta: "Work a complete expected-value question" },
+  { href: "/concepts/expected-value-vs-fair-price", label: "Expected Value vs Fair Price", meta: "Read the core idea behind the drill" },
+];
+
+const ctaTiles = [
+  {
+    label: "Play games",
+    description: "Fast drills and interactive trading reps.",
+    href: "/games",
+    action: "Browse games",
+    symbol: "▶",
+    accent: "bg-accent",
+  },
+  {
+    label: "Worked questions",
+    description: "Interview-style problems with hints and solutions.",
+    href: "/questions",
+    action: "Browse questions",
+    symbol: "?",
+    accent: "bg-accent-2",
+  },
+  {
+    label: "Read concepts",
+    description: "Short explainers for the ideas behind the drills.",
+    href: "/concepts",
+    action: "Browse concepts",
+    symbol: "ƒ",
+    accent: "bg-warn",
+  },
+];
+
+const recommendedPath = [
+  {
+    kind: "Read",
+    label: "Expected Value vs Fair Price",
+    href: "/concepts/expected-value-vs-fair-price",
+  },
+  {
+    kind: "Solve",
+    label: "Dice EV: Should You Take the Bet?",
+    href: "/questions/dice-ev-take-or-pass",
+  },
+  {
+    kind: "Play",
+    label: "EV: Take or Pass",
+    href: "/games/ev-take-or-pass",
+  },
+];
+---
+
+<BaseLayout
+  title="UBC Trading Group Quant Prep"
+  description="Interactive quant interview prep games, worked questions, and concept guides for probability, expected value, market making, statistics, options, and quant-dev interviews."
+>
+  <section class="relative isolate overflow-hidden border-b border-accent/30 bg-ink text-white">
+    <img
+      src="/assets/quant-prep-hero-gemini.webp"
+      alt=""
+      class="absolute inset-0 -z-20 size-full object-cover object-center"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(135,41,57,0.96)_0%,rgba(135,41,57,0.9)_42%,rgba(35,22,26,0.5)_72%,rgba(35,22,26,0.14)_100%)]"></div>
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:py-20">
+      <div class="max-w-3xl">
+        <p class="mb-5 inline-flex rounded-md border border-white/20 bg-white/10 px-3 py-1 text-sm font-black uppercase text-white/80">
+          UBC Trading Group Quant Prep
+        </p>
+        <h1 class="text-4xl font-black leading-none sm:text-6xl lg:text-7xl">
+          Practice sharper for quant interviews.
+        </h1>
+        <p class="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
+          Games, concepts, and worked questions for probability, expected value,
+          market making, statistics, options, and quant-dev interviews.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/games" class="rounded-lg bg-accent px-5 py-3 font-black text-white shadow-sm transition hover:bg-[#6f2030]">
+            Start practicing
+          </a>
+          <a href="/concepts" class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
+            Read concepts
+          </a>
+          <a href="/questions" class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
+            Worked questions
+          </a>
+        </div>
+      </div>
+
+      <aside class="border-l border-white/20 pl-5 lg:justify-self-end">
+        <p class="text-sm font-black uppercase text-white/60">Start here</p>
+        <div class="mt-4 grid gap-4">
+          {starterLinks.map((item, index) => (
+            <a class="group grid grid-cols-[2.25rem_1fr] gap-3 text-white" href={item.href}>
+              <span class="grid size-9 place-items-center rounded-lg border border-white/20 bg-white/10 text-sm font-black transition group-hover:bg-white group-hover:text-accent">
+                {index + 1}
+              </span>
+              <span>
+                <span class="block font-black leading-6 group-hover:text-white">{item.label}</span>
+                <span class="mt-1 block text-sm leading-6 text-white/70">{item.meta}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-12 px-4 py-12">
+    <div>
+      <div class="max-w-2xl">
+        <p class="text-sm font-black uppercase text-accent">Choose your next step</p>
+        <h2 class="mt-2 text-3xl font-black">What do you want to practice?</h2>
+      </div>
+
+      <div class="mt-6 grid gap-4 lg:grid-cols-3">
+        {ctaTiles.map((tile) => (
+          <a href={tile.href} class="group block overflow-hidden rounded-lg border border-line bg-surface shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+            <div class={`h-2 ${tile.accent}`}></div>
+            <div class="p-5">
+              <div class="flex items-center justify-between gap-4">
+                <span class={`grid size-12 place-items-center rounded-lg ${tile.accent} text-lg font-black text-white`}>
+                  {tile.symbol}
+                </span>
+                <span class="rounded-md border border-accent/30 bg-accent/10 px-3 py-2 text-sm font-black text-accent transition group-hover:bg-accent group-hover:text-white">
+                  {tile.action}
+                </span>
+              </div>
+              <h3 class="mt-5 text-2xl font-black">{tile.label}</h3>
+              <p class="mt-2 text-sm leading-6 text-muted">{tile.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid gap-5 border-y border-line py-8">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-sm font-black uppercase text-accent">Recommended path</p>
+          <h2 class="mt-1 text-2xl font-black">Start with expected value.</h2>
+        </div>
+        <a href="/concepts/expected-value-vs-fair-price" class="rounded-lg bg-accent px-4 py-2 text-sm font-black text-white transition hover:bg-[#6f2030]">
+          Start this path
+        </a>
+      </div>
+
+      <div class="grid gap-3 lg:grid-cols-3">
+        {recommendedPath.map((step, index) => (
+          <a href={step.href} class="group grid grid-cols-[2.25rem_1fr] gap-3 rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+            <span class="grid size-9 place-items-center rounded-lg bg-accent text-sm font-black text-white">{index + 1}</span>
+            <span>
+              <span class="block text-xs font-black uppercase text-muted">{step.kind}</span>
+              <span class="block font-black group-hover:text-accent">{step.label}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-3">
+      <div class="flex items-baseline justify-between gap-4 border-b border-line py-3 sm:border-b-0 sm:border-r sm:pr-5">
+        <p class="text-sm font-black uppercase text-muted">Games</p>
+        <p class="text-4xl font-black text-accent">{games.length}</p>
+      </div>
+      <div class="flex items-baseline justify-between gap-4 border-b border-line py-3 sm:border-b-0 sm:border-r sm:px-5">
+        <p class="text-sm font-black uppercase text-muted">Questions</p>
+        <p class="text-4xl font-black text-accent">{questions.length}</p>
+      </div>
+      <div class="flex items-baseline justify-between gap-4 py-3 sm:pl-5">
+        <p class="text-sm font-black uppercase text-muted">Concepts</p>
+        <p class="text-4xl font-black text-accent">{concepts.length}</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

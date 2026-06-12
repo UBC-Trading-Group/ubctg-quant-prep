@@ -1,0 +1,205 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/shared/Tag.astro";
+import RelatedContent from "../../components/shared/RelatedContent.astro";
+import AdverseSelectionSimulator from "../../components/games/AdverseSelectionSimulator";
+import AlgorithmComplexityQuiz from "../../components/games/AlgorithmComplexityQuiz";
+import ApproximationDrill from "../../components/games/ApproximationDrill";
+import AssumptionStackBuilder from "../../components/games/AssumptionStackBuilder";
+import BankrollSizingGame from "../../components/games/BankrollSizingGame";
+import BinomialTreePricer from "../../components/games/BinomialTreePricer";
+import CardDrawLab from "../../components/games/CardDrawLab";
+import CardRevealGame from "../../components/games/CardRevealGame";
+import CardSumGame from "../../components/games/CardSumGame";
+import CoinPatternRace from "../../components/games/CoinPatternRace";
+import ConfidenceIntervalGame from "../../components/games/ConfidenceIntervalGame";
+import CouponCollectorGame from "../../components/games/CouponCollectorGame";
+import CppBugHunt from "../../components/games/CppBugHunt";
+import CrowdCalibration from "../../components/games/CrowdCalibration";
+import DailyMarketMakingChallenge from "../../components/games/DailyMarketMakingChallenge";
+import DeltaHedgingSimulator from "../../components/games/DeltaHedgingSimulator";
+import DiceMarketGame from "../../components/games/DiceMarketGame";
+import DiceProbabilityGrid from "../../components/games/DiceProbabilityGrid";
+import DiceRerollGame from "../../components/games/DiceRerollGame";
+import DistributionBuilder from "../../components/games/DistributionBuilder";
+import DynamicDiceGame from "../../components/games/DynamicDiceGame";
+import ETFArbitrage from "../../components/games/ETFArbitrage";
+import EVTakeOrPass from "../../components/games/EVTakeOrPass";
+import EventRelationshipGame from "../../components/games/EventRelationshipGame";
+import FairPriceSlider from "../../components/games/FairPriceSlider";
+import FermiAnswerGame from "../../components/games/FermiAnswerGame";
+import FermiMarketMaking from "../../components/games/FermiMarketMaking";
+import FillInformationGame from "../../components/games/FillInformationGame";
+import FractionsToDecimals from "../../components/games/FractionsToDecimals";
+import FruitMarket from "../../components/games/FruitMarket";
+import GreeksSliderLab from "../../components/games/GreeksSliderLab";
+import HiddenSignalGame from "../../components/games/HiddenSignalGame";
+import ImpliedVolSolver from "../../components/games/ImpliedVolSolver";
+import InformedVsUninformedFlow from "../../components/games/InformedVsUninformedFlow";
+import InventoryAdverseSelection from "../../components/games/InventoryAdverseSelection";
+import LatencyRaceLite from "../../components/games/LatencyRaceLite";
+import MakeMeAMarket from "../../components/games/MakeMeAMarket";
+import MarketOfCardsLite from "../../components/games/MarketOfCardsLite";
+import MarketSizeBuilder from "../../components/games/MarketSizeBuilder";
+import MarketTakingGame from "../../components/games/MarketTakingGame";
+import MentalMathSprint from "../../components/games/MentalMathSprint";
+import MonteCarloConvergenceGame from "../../components/games/MonteCarloConvergenceGame";
+import NumberBox from "../../components/games/NumberBox";
+import OptimalRerollGame from "../../components/games/OptimalRerollGame";
+import OrderStatisticsGame from "../../components/games/OrderStatisticsGame";
+import PairsMispricingGame from "../../components/games/PairsMispricingGame";
+import PayoffConstructor from "../../components/games/PayoffConstructor";
+import PokerHandProbabilityGame from "../../components/games/PokerHandProbabilityGame";
+import PutCallParityArbitrage from "../../components/games/PutCallParityArbitrage";
+import QuoteRevisionGame from "../../components/games/QuoteRevisionGame";
+import RandomVariableTransformer from "../../components/games/RandomVariableTransformer";
+import RedBlackOptimalStopping from "../../components/games/RedBlackOptimalStopping";
+import RepeatedBetsSimulator from "../../components/games/RepeatedBetsSimulator";
+import SealedBoxEVGame from "../../components/games/SealedBoxEVGame";
+import SequenceHunter from "../../components/games/SequenceHunter";
+import SignalVsNoiseGame from "../../components/games/SignalVsNoiseGame";
+import SizeSelectionGame from "../../components/games/SizeSelectionGame";
+import SpreadWidthChallenge from "../../components/games/SpreadWidthChallenge";
+import StaleQuoteGame from "../../components/games/StaleQuoteGame";
+import SyntheticContractGame from "../../components/games/SyntheticContractGame";
+import TightestCorrectRange from "../../components/games/TightestCorrectRange";
+import VolSmileBuilder from "../../components/games/VolSmileBuilder";
+
+export async function getStaticPaths() {
+  const games = (await getCollection("games")).sort((a, b) => a.id.localeCompare(b.id));
+
+  return games.map((game, index) => ({
+    params: { slug: game.id },
+    props: {
+      game,
+      previousGame: games[index - 1] ?? null,
+      nextGame: games[index + 1] ?? null,
+    },
+  }));
+}
+
+const { game, previousGame, nextGame } = Astro.props;
+const { Content } = await render(game);
+const componentName = game.data.component;
+const [concepts, questions] = await Promise.all([
+  getCollection("concepts"),
+  getCollection("questions"),
+]);
+const relatedConcepts = concepts.filter((concept) => game.data.relatedConcepts?.includes(concept.id));
+const relatedQuestions = questions.filter((question) => game.data.relatedQuestions?.includes(question.id));
+const pageTitle = game.data.seoTitle ?? game.data.title;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  name: game.data.title,
+  description: game.data.description,
+  educationalLevel: game.data.difficulty,
+  about: game.data.tags,
+  learningResourceType: "Interactive practice game",
+};
+---
+
+<BaseLayout title={`${pageTitle} | UBC Trading Group`} description={game.data.description} type="article" jsonLd={jsonLd}>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <div class="flex flex-wrap gap-2">
+      <Tag label={game.data.category} tone="warn" />
+      <Tag label={game.data.difficulty} />
+    </div>
+
+    <h1 class="mt-4 text-4xl font-black">{game.data.title}</h1>
+    <p class="mt-4 text-lg leading-8 text-muted">{game.data.description}</p>
+
+    <div class="game-content mt-8 max-w-none">
+      <Content />
+    </div>
+
+    <div class="game-interaction mt-8">
+      {componentName === "AdverseSelectionSimulator" && <AdverseSelectionSimulator client:load />}
+      {componentName === "AlgorithmComplexityQuiz" && <AlgorithmComplexityQuiz client:load />}
+      {componentName === "ApproximationDrill" && <ApproximationDrill client:load />}
+      {componentName === "AssumptionStackBuilder" && <AssumptionStackBuilder client:load />}
+      {componentName === "BankrollSizingGame" && <BankrollSizingGame client:load />}
+      {componentName === "BinomialTreePricer" && <BinomialTreePricer client:load />}
+      {componentName === "CardDrawLab" && <CardDrawLab client:load />}
+      {componentName === "CardRevealGame" && <CardRevealGame client:load />}
+      {componentName === "CardSumGame" && <CardSumGame client:load />}
+      {componentName === "CoinPatternRace" && <CoinPatternRace client:load />}
+      {componentName === "ConfidenceIntervalGame" && <ConfidenceIntervalGame client:load />}
+      {componentName === "CouponCollectorGame" && <CouponCollectorGame client:load />}
+      {componentName === "CppBugHunt" && <CppBugHunt client:load />}
+      {componentName === "CrowdCalibration" && <CrowdCalibration client:load />}
+      {componentName === "DailyMarketMakingChallenge" && <DailyMarketMakingChallenge client:load />}
+      {componentName === "DeltaHedgingSimulator" && <DeltaHedgingSimulator client:load />}
+      {componentName === "DiceMarketGame" && <DiceMarketGame client:load />}
+      {componentName === "DiceProbabilityGrid" && <DiceProbabilityGrid client:load />}
+      {componentName === "DiceRerollGame" && <DiceRerollGame client:load />}
+      {componentName === "DistributionBuilder" && <DistributionBuilder client:load />}
+      {componentName === "DynamicDiceGame" && <DynamicDiceGame client:load />}
+      {componentName === "ETFArbitrage" && <ETFArbitrage client:load />}
+      {componentName === "EVTakeOrPass" && <EVTakeOrPass client:load />}
+      {componentName === "EventRelationshipGame" && <EventRelationshipGame client:load />}
+      {componentName === "FairPriceSlider" && <FairPriceSlider client:load />}
+      {componentName === "FermiAnswerGame" && <FermiAnswerGame client:load />}
+      {componentName === "FermiMarketMaking" && <FermiMarketMaking client:load />}
+      {componentName === "FillInformationGame" && <FillInformationGame client:load />}
+      {componentName === "FractionsToDecimals" && <FractionsToDecimals client:load />}
+      {componentName === "FruitMarket" && <FruitMarket client:load />}
+      {componentName === "GreeksSliderLab" && <GreeksSliderLab client:load />}
+      {componentName === "HiddenSignalGame" && <HiddenSignalGame client:load />}
+      {componentName === "ImpliedVolSolver" && <ImpliedVolSolver client:load />}
+      {componentName === "InformedVsUninformedFlow" && <InformedVsUninformedFlow client:load />}
+      {componentName === "InventoryAdverseSelection" && <InventoryAdverseSelection client:load />}
+      {componentName === "LatencyRaceLite" && <LatencyRaceLite client:load />}
+      {componentName === "MakeMeAMarket" && <MakeMeAMarket client:load />}
+      {componentName === "MarketOfCardsLite" && <MarketOfCardsLite client:load />}
+      {componentName === "MarketSizeBuilder" && <MarketSizeBuilder client:load />}
+      {componentName === "MarketTakingGame" && <MarketTakingGame client:load />}
+      {componentName === "MentalMathSprint" && <MentalMathSprint client:load />}
+      {componentName === "MonteCarloConvergenceGame" && <MonteCarloConvergenceGame client:load />}
+      {componentName === "NumberBox" && <NumberBox client:load />}
+      {componentName === "OptimalRerollGame" && <OptimalRerollGame client:load />}
+      {componentName === "OrderStatisticsGame" && <OrderStatisticsGame client:load />}
+      {componentName === "PairsMispricingGame" && <PairsMispricingGame client:load />}
+      {componentName === "PayoffConstructor" && <PayoffConstructor client:load />}
+      {componentName === "PokerHandProbabilityGame" && <PokerHandProbabilityGame client:load />}
+      {componentName === "PutCallParityArbitrage" && <PutCallParityArbitrage client:load />}
+      {componentName === "QuoteRevisionGame" && <QuoteRevisionGame client:load />}
+      {componentName === "RandomVariableTransformer" && <RandomVariableTransformer client:load />}
+      {componentName === "RedBlackOptimalStopping" && <RedBlackOptimalStopping client:load />}
+      {componentName === "RepeatedBetsSimulator" && <RepeatedBetsSimulator client:load />}
+      {componentName === "SealedBoxEVGame" && <SealedBoxEVGame client:load />}
+      {componentName === "SequenceHunter" && <SequenceHunter client:load />}
+      {componentName === "SignalVsNoiseGame" && <SignalVsNoiseGame client:load />}
+      {componentName === "SizeSelectionGame" && <SizeSelectionGame client:load />}
+      {componentName === "SpreadWidthChallenge" && <SpreadWidthChallenge client:load />}
+      {componentName === "StaleQuoteGame" && <StaleQuoteGame client:load />}
+      {componentName === "SyntheticContractGame" && <SyntheticContractGame client:load />}
+      {componentName === "TightestCorrectRange" && <TightestCorrectRange client:load />}
+      {componentName === "VolSmileBuilder" && <VolSmileBuilder client:load />}
+    </div>
+
+    <RelatedContent concepts={relatedConcepts} questions={relatedQuestions} />
+
+    <nav class="mt-12 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="Game navigation">
+      {
+        previousGame ? (
+          <a class="group rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:border-warn" href={`/games/${previousGame.id}`}>
+            <span class="text-xs font-black uppercase text-muted">Previous Game</span>
+            <span class="mt-1 block font-black group-hover:text-warn">{previousGame.data.title}</span>
+          </a>
+        ) : (
+          <span class="hidden sm:block" aria-hidden="true" />
+        )
+      }
+      {
+        nextGame && (
+          <a class="group rounded-lg border border-line bg-surface p-4 text-left shadow-sm transition hover:border-warn sm:text-right" href={`/games/${nextGame.id}`}>
+            <span class="text-xs font-black uppercase text-muted">Next Game</span>
+            <span class="mt-1 block font-black group-hover:text-warn">{nextGame.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>
