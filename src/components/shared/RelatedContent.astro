@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../../lib/site";
+
 const { concepts = [], questions = [], games = [] } = Astro.props;
 
 const groups = [
@@ -38,7 +40,7 @@ const groups = [
               {group.items.map((item) => (
                 <a
                   class="group block rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
-                  href={group.href(item)}
+                  href={withBase(group.href(item))}
                 >
                   <span class="block font-black group-hover:text-accent">{item.data.title}</span>
                   <span class="mt-1 block text-sm font-bold text-muted">{group.meta(item)}</span>

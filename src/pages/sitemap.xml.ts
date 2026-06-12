@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { absoluteUrl } from "../lib/site";
 
 const escapeXml = (value: string) =>
   value
@@ -29,7 +30,7 @@ export const GET: APIRoute = async ({ site }) => {
   ].sort();
 
   const urls = paths
-    .map((path) => `  <url><loc>${escapeXml(new URL(withTrailingSlash(path), siteUrl).toString())}</loc></url>`)
+    .map((path) => `  <url><loc>${escapeXml(absoluteUrl(withTrailingSlash(path), siteUrl))}</loc></url>`)
     .join("\n");
 
   return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, {

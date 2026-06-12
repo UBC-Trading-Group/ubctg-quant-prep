@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/site";
 
 const [games, concepts, questions] = await Promise.all([
   getCollection("games"),
@@ -66,7 +67,7 @@ const recommendedPath = [
 >
   <section class="relative isolate overflow-hidden border-b border-accent/30 bg-ink text-white">
     <img
-      src="/assets/quant-prep-hero-gemini.webp"
+      src={withBase("/assets/quant-prep-hero-gemini.webp")}
       alt=""
       class="absolute inset-0 -z-20 size-full object-cover object-center"
       loading="eager"
@@ -86,13 +87,13 @@ const recommendedPath = [
           market making, statistics, options, and quant-dev interviews.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/games" class="rounded-lg bg-accent px-5 py-3 font-black text-white shadow-sm transition hover:bg-[#6f2030]">
+          <a href={withBase("/games")} class="rounded-lg bg-accent px-5 py-3 font-black text-white shadow-sm transition hover:bg-[#6f2030]">
             Start practicing
           </a>
-          <a href="/concepts" class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
+          <a href={withBase("/concepts")} class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
             Read concepts
           </a>
-          <a href="/questions" class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
+          <a href={withBase("/questions")} class="rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-black text-white transition hover:bg-white/20">
             Worked questions
           </a>
         </div>
@@ -102,7 +103,7 @@ const recommendedPath = [
         <p class="text-sm font-black uppercase text-white/60">Start here</p>
         <div class="mt-4 grid gap-4">
           {starterLinks.map((item, index) => (
-            <a class="group grid grid-cols-[2.25rem_1fr] gap-3 text-white" href={item.href}>
+            <a class="group grid grid-cols-[2.25rem_1fr] gap-3 text-white" href={withBase(item.href)}>
               <span class="grid size-9 place-items-center rounded-lg border border-white/20 bg-white/10 text-sm font-black transition group-hover:bg-white group-hover:text-accent">
                 {index + 1}
               </span>
@@ -126,7 +127,7 @@ const recommendedPath = [
 
       <div class="mt-6 grid gap-4 lg:grid-cols-3">
         {ctaTiles.map((tile) => (
-          <a href={tile.href} class="group block overflow-hidden rounded-lg border border-line bg-surface shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+          <a href={withBase(tile.href)} class="group block overflow-hidden rounded-lg border border-line bg-surface shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
             <div class={`h-2 ${tile.accent}`}></div>
             <div class="p-5">
               <div class="flex items-center justify-between gap-4">
@@ -151,14 +152,14 @@ const recommendedPath = [
           <p class="text-sm font-black uppercase text-accent">Recommended path</p>
           <h2 class="mt-1 text-2xl font-black">Start with expected value.</h2>
         </div>
-        <a href="/concepts/expected-value-vs-fair-price" class="rounded-lg bg-accent px-4 py-2 text-sm font-black text-white transition hover:bg-[#6f2030]">
+        <a href={withBase("/concepts/expected-value-vs-fair-price")} class="rounded-lg bg-accent px-4 py-2 text-sm font-black text-white transition hover:bg-[#6f2030]">
           Start this path
         </a>
       </div>
 
       <div class="grid gap-3 lg:grid-cols-3">
         {recommendedPath.map((step, index) => (
-          <a href={step.href} class="group grid grid-cols-[2.25rem_1fr] gap-3 rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
+          <a href={withBase(step.href)} class="group grid grid-cols-[2.25rem_1fr] gap-3 rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md">
             <span class="grid size-9 place-items-center rounded-lg bg-accent text-sm font-black text-white">{index + 1}</span>
             <span>
               <span class="block text-xs font-black uppercase text-muted">{step.kind}</span>

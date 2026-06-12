@@ -3,6 +3,7 @@ import "katex/dist/katex.min.css";
 import "../styles/global.css";
 import Header from "../components/shared/Header.astro";
 import Footer from "../components/shared/Footer.astro";
+import { absoluteUrl, withBase } from "../lib/site";
 
 const {
   title = "UBC Trading Group Quant Prep",
@@ -13,8 +14,8 @@ const {
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL("https://ubctradinggroup.com");
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const imageUrl = new URL(image, siteUrl).toString();
+const canonicalUrl = absoluteUrl(Astro.url.pathname, siteUrl);
+const imageUrl = absoluteUrl(image, siteUrl);
 ---
 
 <!doctype html>
@@ -26,8 +27,8 @@ const imageUrl = new URL(image, siteUrl).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href={withBase("/favicon.png")} />
+    <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
     <meta property="og:site_name" content="UBC Trading Group Quant Prep" />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />

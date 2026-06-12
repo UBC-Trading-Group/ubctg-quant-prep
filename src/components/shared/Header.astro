@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../../lib/site";
+
 const nav = [
   { href: "/games", label: "Games" },
   { href: "/concepts", label: "Concepts" },
@@ -9,9 +11,9 @@ const nav = [
 
 <header class="sticky top-0 z-20 border-b border-line bg-surface/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-    <a href="/" class="flex items-center gap-3 font-black" aria-label="UBC Trading Group Quant Prep home">
+    <a href={withBase("/")} class="flex items-center gap-3 font-black" aria-label="UBC Trading Group Quant Prep home">
       <img
-        src="/assets/brand/ubctg-mark.png"
+        src={withBase("/assets/brand/ubctg-mark.png")}
         alt=""
         class="size-10 object-contain"
         loading="eager"
@@ -23,7 +25,7 @@ const nav = [
     <nav class="flex flex-wrap gap-2 text-sm font-semibold text-muted">
       {nav.map((item) => (
         <a
-          href={item.href}
+          href={withBase(item.href)}
           class="rounded-md px-3 py-2 transition hover:bg-panel hover:text-accent"
         >
           {item.label}

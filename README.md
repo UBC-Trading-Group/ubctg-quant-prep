@@ -42,4 +42,6 @@ Interactive games live in `src/components/games` and are imported by MDX game pa
 
 ## Deployment
 
-The GitHub Pages workflow is in `.github/workflows/deploy.yml`. Once the repo exists on GitHub, set Pages source to GitHub Actions. If deploying as a project site under a repo path, add `site` and `base` to `astro.config.mjs`.
+The GitHub Pages workflow is in `.github/workflows/deploy.yml`. Once the repo exists on GitHub, set Pages source to GitHub Actions.
+
+`astro.config.mjs` automatically uses the GitHub repository name as the Pages project-site base path during GitHub Actions builds, so URLs like `/ubctg-quant-prep/_astro/...` are generated correctly. For a custom domain or user/organization site, set `BASE_PATH=/` and `SITE_URL=https://your-domain.example` in the workflow environment.

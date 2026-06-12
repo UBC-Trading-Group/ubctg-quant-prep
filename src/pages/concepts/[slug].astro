@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/shared/Tag.astro";
 import RelatedContent from "../../components/shared/RelatedContent.astro";
+import { withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
   const concepts = (await getCollection("concepts")).sort((a, b) => a.id.localeCompare(b.id));
@@ -56,7 +57,7 @@ const jsonLd = {
     <nav class="mt-12 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="Concept guide navigation">
       {
         previousConcept ? (
-          <a class="group rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:border-accent" href={`/concepts/${previousConcept.id}`}>
+          <a class="group rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:border-accent" href={withBase(`/concepts/${previousConcept.id}`)}>
             <span class="text-xs font-black uppercase text-muted">Previous Concept</span>
             <span class="mt-1 block font-black group-hover:text-accent">{previousConcept.data.title}</span>
           </a>
@@ -66,7 +67,7 @@ const jsonLd = {
       }
       {
         nextConcept && (
-          <a class="group rounded-lg border border-line bg-surface p-4 text-left shadow-sm transition hover:border-accent sm:text-right" href={`/concepts/${nextConcept.id}`}>
+          <a class="group rounded-lg border border-line bg-surface p-4 text-left shadow-sm transition hover:border-accent sm:text-right" href={withBase(`/concepts/${nextConcept.id}`)}>
             <span class="text-xs font-black uppercase text-muted">Next Concept</span>
             <span class="mt-1 block font-black group-hover:text-accent">{nextConcept.data.title}</span>
           </a>

@@ -8,7 +8,23 @@ import tailwindcss from "@tailwindcss/vite";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
-const site = process.env.SITE_URL ?? "https://ubctradinggroup.com";
+const githubRepositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1];
+const githubRepositoryOwner = process.env.GITHUB_REPOSITORY_OWNER;
+
+const normalizeBasePath = (value) => {
+  if (!value || value === "/") return "/";
+  return `/${value.replace(/^\/+|\/+$/g, "")}`;
+};
+
+const base = normalizeBasePath(
+  process.env.BASE_PATH ??
+    (process.env.GITHUB_ACTIONS === "true" && githubRepositoryName ? `/${githubRepositoryName}` : "/"),
+);
+const site =
+  process.env.SITE_URL ??
+  (process.env.GITHUB_ACTIONS === "true" && githubRepositoryOwner
+    ? `https://${githubRepositoryOwner}.github.io`
+    : "https://ubctradinggroup.com");
 const reactJsxRuntimeShim = fileURLToPath(new URL("./src/lib/react-jsx-runtime.ts", import.meta.url));
 const reactJsxDevRuntimeShim = fileURLToPath(new URL("./src/lib/react-jsx-dev-runtime.ts", import.meta.url));
 
@@ -28,6 +44,7 @@ function reactJsxRuntimeClientShims() {
 
 export default defineConfig({
   site,
+  base,
   integrations: [react(), mdx()],
   markdown: {
     processor: unified({

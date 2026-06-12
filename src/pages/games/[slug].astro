@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/shared/Tag.astro";
 import RelatedContent from "../../components/shared/RelatedContent.astro";
+import { withBase } from "../../lib/site";
 import AdverseSelectionSimulator from "../../components/games/AdverseSelectionSimulator";
 import AlgorithmComplexityQuiz from "../../components/games/AlgorithmComplexityQuiz";
 import ApproximationDrill from "../../components/games/ApproximationDrill";
@@ -184,7 +185,7 @@ const jsonLd = {
     <nav class="mt-12 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="Game navigation">
       {
         previousGame ? (
-          <a class="group rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:border-warn" href={`/games/${previousGame.id}`}>
+          <a class="group rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:border-warn" href={withBase(`/games/${previousGame.id}`)}>
             <span class="text-xs font-black uppercase text-muted">Previous Game</span>
             <span class="mt-1 block font-black group-hover:text-warn">{previousGame.data.title}</span>
           </a>
@@ -194,7 +195,7 @@ const jsonLd = {
       }
       {
         nextGame && (
-          <a class="group rounded-lg border border-line bg-surface p-4 text-left shadow-sm transition hover:border-warn sm:text-right" href={`/games/${nextGame.id}`}>
+          <a class="group rounded-lg border border-line bg-surface p-4 text-left shadow-sm transition hover:border-warn sm:text-right" href={withBase(`/games/${nextGame.id}`)}>
             <span class="text-xs font-black uppercase text-muted">Next Game</span>
             <span class="mt-1 block font-black group-hover:text-warn">{nextGame.data.title}</span>
           </a>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/site";
 
 const games = await getCollection("games");
 
@@ -208,7 +209,7 @@ const difficultyTone = {
                   <h2 class="text-2xl font-black">{category.name}</h2>
                 </div>
               </div>
-              <a href={category.href} class="rounded-lg bg-accent px-4 py-2 text-sm font-black text-white transition hover:bg-[#6f2030]">
+              <a href={withBase(category.href)} class="rounded-lg bg-accent px-4 py-2 text-sm font-black text-white transition hover:bg-[#6f2030]">
                 Start
               </a>
             </div>
@@ -216,7 +217,7 @@ const difficultyTone = {
             <div class="grid gap-3">
               {categoryGames.map((game) => (
                 <a
-                  href={`/games/${game.id}`}
+                  href={withBase(`/games/${game.id}`)}
                   class="grid gap-3 rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md md:grid-cols-[1fr_auto] md:items-center"
                 >
                   <span class="min-w-0">
@@ -251,7 +252,7 @@ const difficultyTone = {
           <div class="grid gap-3">
             {otherGames.map((game) => (
               <a
-                href={`/games/${game.id}`}
+                href={withBase(`/games/${game.id}`)}
                 class="grid gap-3 rounded-lg border border-line bg-surface p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md md:grid-cols-[1fr_auto] md:items-center"
               >
                 <span class="min-w-0">

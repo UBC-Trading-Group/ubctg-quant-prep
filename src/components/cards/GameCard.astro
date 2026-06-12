@@ -1,9 +1,11 @@
 ---
+import { withBase } from "../../lib/site";
+
 const { game } = Astro.props;
 ---
 
 <a
-  href={`/games/${game.id}`}
+  href={withBase(`/games/${game.id}`)}
   class="block rounded-lg border border-line bg-surface p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-warn/40 hover:shadow-md"
 >
   <p class="text-xs font-bold uppercase text-warn">{game.data.category}</p>
