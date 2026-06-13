@@ -36,14 +36,70 @@ Public quant interview prep site built with Astro, MDX content collections, Reac
 
 ## Content
 
-Add concepts in `src/content/concepts`, worked questions in `src/content/questions`, and game pages in `src/content/games`. Use the Markdown templates in `templates/` for new contributions.
+Content pages are Markdown or MDX files:
 
-For concepts, maintainers can also use the **New Concept Draft** workflow in GitHub Actions. It creates a draft concept markdown file in a pull request, using the required frontmatter schema.
+- Concepts: `src/content/concepts`
+- Worked questions: `src/content/questions`
+- Game pages: `src/content/games`
+
+Use the files in `templates/` when starting from scratch. The required frontmatter fields are defined in `src/content.config.ts`.
+
+### Add a Ready Concept Markdown File
+
+1. Save the file in `src/content/concepts`.
+2. Name it with a URL-safe slug, for example:
+
+   ```text
+   src/content/concepts/law-of-total-probability.md
+   ```
+
+3. Make sure the file starts with this frontmatter shape:
+
+   ```md
+   ---
+   title: "Law of Total Probability"
+   description: "Break a probability into weighted cases."
+   topic: "Probability"
+   difficulty: "Beginner"
+   tags: ["probability", "conditional probability"]
+   relatedGames: []
+   relatedQuestions: []
+   ---
+   ```
+
+   `difficulty` must be `Beginner`, `Intermediate`, or `Advanced`.
+
+4. Build locally:
+
+   ```bash
+   npm run build
+   ```
+
+5. Commit and push:
+
+   ```bash
+   git add src/content/concepts/law-of-total-probability.md
+   git commit -m "Add law of total probability concept"
+   git push origin main
+   ```
+
+After the push to `main`, GitHub Actions deploys the updated site.
+
+### Draft a Concept From GitHub
+
+Maintainers can also use **Actions -> New Concept Draft** on GitHub. Fill in the title, description, topic, difficulty, and tags. The workflow creates a pull request with a draft concept file, then you can edit the body of the markdown before merging.
 
 Interactive games live in `src/components/games` and are imported by MDX game pages as hydrated React islands.
 
 ## Deployment
 
-The GitHub Pages workflow is in `.github/workflows/deploy.yml`. Once the repo exists on GitHub, set Pages source to GitHub Actions.
+Deployment is automatic.
 
-`astro.config.mjs` automatically uses the GitHub repository name as the Pages project-site base path during GitHub Actions builds, so URLs like `/ubctg-quant-prep/_astro/...` are generated correctly. For a custom domain or user/organization site, set `BASE_PATH=/` and `SITE_URL=https://your-domain.example` in the workflow environment.
+When changes are pushed to `main`, `.github/workflows/deploy.yml` builds the Astro site and publishes it to GitHub Pages.
+
+On GitHub, the repository only needs Pages set to **GitHub Actions**:
+
+1. Go to **Settings -> Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+
+For a custom domain or user/organization site, set `BASE_PATH=/` and `SITE_URL=https://your-domain.example` in the workflow environment.
