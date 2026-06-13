@@ -38,6 +38,8 @@ Public quant interview prep site built with Astro, MDX content collections, Reac
 
 Add concepts in `src/content/concepts`, worked questions in `src/content/questions`, and game pages in `src/content/games`. Use the Markdown templates in `templates/` for new contributions.
 
+For concepts, maintainers can also use the **New Concept Draft** workflow in GitHub Actions. It creates a draft concept markdown file in a pull request, using the required frontmatter schema.
+
 Interactive games live in `src/components/games` and are imported by MDX game pages as hydrated React islands.
 
 ## Deployment
