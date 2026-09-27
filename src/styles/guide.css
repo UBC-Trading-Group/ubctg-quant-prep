@@ -1,0 +1,69 @@
+body{margin:0;background:#fff}
+
+#quant-guide-prose{color-scheme:light;background:#fff;color:#000;font:15px/1.7 Arial,Helvetica,sans-serif;padding:0 32px;width:100%;overflow-wrap:anywhere}
+#quant-guide-prose,#quant-guide-prose *{box-sizing:border-box}
+#quant-guide-prose .qgp-page{max-width:840px;margin:auto}
+#quant-guide-prose a{color:#892736;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+#quant-guide-prose a:hover{text-decoration-thickness:2px}
+#quant-guide-prose header{padding:24px 0 18px;border-bottom:2px solid #892736;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:12px}
+#quant-guide-prose header .qgp-brand{color:#000;font-weight:700;letter-spacing:.5px;text-decoration:none}
+#quant-guide-prose h1{font-size:30px;line-height:1.25;margin:27px 0 14px;letter-spacing:-.5px}
+#quant-guide-prose h2{font-size:23px;line-height:1.3;margin:0 0 15px}
+#quant-guide-prose h3{font-size:19px;line-height:1.4;margin:0 0 15px}
+#quant-guide-prose p{margin:0 0 17px}
+#quant-guide-prose .qgp-intro{margin-bottom:18px}
+#quant-guide-prose .qgp-small{font-size:12px;line-height:1.65}
+#quant-guide-prose nav{display:flex;flex-wrap:wrap;gap:8px 23px;padding:12px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;font-size:13px;margin:20px 0 26px}
+#quant-guide-prose section,#quant-guide-prose article{scroll-margin-top:20px}
+#quant-guide-prose table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.55;margin:16px 0 20px}
+#quant-guide-prose th{border-bottom:2px solid #892736;text-align:left;padding:8px 12px 9px 0;font-weight:700;vertical-align:top}
+#quant-guide-prose td{padding:11px 12px 11px 0;border-bottom:1px solid #ccc;vertical-align:top}
+#quant-guide-prose th:first-child{width:24%}
+#quant-guide-prose th:nth-child(2){width:40%}
+#quant-guide-prose th:last-child,#quant-guide-prose td:last-child{padding-right:0}
+#quant-guide-prose .qgp-author{display:block;font-size:11px;margin-top:3px}
+#quant-guide-prose .qgp-section{padding-top:24px}
+#quant-guide-prose .qgp-heading{padding-top:25px;margin-top:23px;border-top:2px solid #892736}
+#quant-guide-prose article{padding-top:26px;margin-top:16px;border-top:1px solid #ccc}
+#quant-guide-prose .qgp-number{color:#892736;font-size:13px;font-weight:400;margin-right:11px}
+#quant-guide-prose .qgp-subnav{font-size:13px;margin:15px 0 24px;line-height:2}
+#quant-guide-prose .qgp-subnav a{margin-right:18px;display:inline-block}
+#quant-guide-prose footer{border-top:2px solid #892736;margin-top:35px;padding:20px 0 30px;font-size:12px}
+#quant-guide-prose footer .qgp-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px}
+#quant-guide-prose article{display:flow-root}
+#quant-guide-prose .qgp-cover{float:right;width:104px;margin:2px 0 18px 25px;text-align:center}
+#quant-guide-prose .qgp-cover img{display:block;width:100%;height:150px;object-fit:contain;object-position:top}
+#quant-guide-prose .qgp-cover figcaption{font-size:11px;line-height:1.45;margin-top:7px}
+#quant-guide-prose .qgp-cover-pair{width:188px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#quant-guide-prose .qgp-cover-pair figcaption{grid-column:1/-1}
+#quant-guide-prose .qgp-cover-pair img{height:138px}
+#quant-guide-prose blockquote{margin:25px 0;padding:5px 0 5px 19px;border-left:2px solid #892736;font-size:16px;line-height:1.6}
+#quant-guide-prose blockquote p{margin:0 0 7px}
+#quant-guide-prose blockquote cite{font-style:normal;font-size:12px}
+#quant-guide-prose .qgp-figure{clear:both;margin:26px 0 21px;padding:18px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc}
+#quant-guide-prose .qgp-figure-title{font-size:13px;font-weight:700;margin:0 0 17px}
+#quant-guide-prose .qgp-figure figcaption{font-size:12px;line-height:1.6;margin-top:16px;max-width:740px}
+#quant-guide-prose .qgp-tree{display:grid;grid-template-columns:1fr 64px 1.5fr;align-items:center;max-width:570px;margin:0 auto;font-size:14px;line-height:1.7}
+#quant-guide-prose .qgp-tree-start{text-align:center}
+#quant-guide-prose .qgp-tree-branches{display:flex;flex-direction:column;gap:24px}
+#quant-guide-prose .qgp-tree svg{width:64px;height:145px}
+#quant-guide-prose .qgp-payoff{color:#892736;font-weight:600}
+#quant-guide-prose .qgp-equation{font:17px/1.6 Georgia,serif;text-align:center;margin:17px 0 0}
+#quant-guide-prose .qgp-booktable{max-width:570px;margin:0 auto;font-variant-numeric:tabular-nums}
+#quant-guide-prose .qgp-booktable th,#quant-guide-prose .qgp-booktable td{width:25%;text-align:center;padding:8px 5px}
+#quant-guide-prose .qgp-booktable .qgp-best{color:#892736;font-weight:700}
+#quant-guide-prose .qgp-spread{text-align:center;font-size:13px;margin-top:12px;color:#892736}
+#quant-guide-prose .qgp-timeline{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:15px;font-size:13px}
+#quant-guide-prose .qgp-time-step{border-top:3px solid #000;padding-top:10px}
+#quant-guide-prose .qgp-time-step:last-child{border-color:#892736}
+#quant-guide-prose .qgp-time-step strong{display:block;margin-bottom:6px}
+#quant-guide-prose .qgp-time-step span{display:block;font-size:12px;line-height:1.55}
+#quant-guide-prose .qgp-time-direction{text-align:right;margin-top:12px;font-size:12px}
+#quant-guide-prose .qgp-question{clear:both;margin:22px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:15px 0;font-size:14px}
+#quant-guide-prose .qgp-question p{margin-bottom:9px}
+#quant-guide-prose .qgp-question summary{color:#892736;padding:6px 0;font-size:13px}
+@media(max-width:580px){#quant-guide-prose .qgp-cover{float:none;margin:16px 0 20px;width:95px;text-align:left}#quant-guide-prose .qgp-cover-pair{width:188px}#quant-guide-prose .qgp-cover img{height:140px}#quant-guide-prose .qgp-tree{grid-template-columns:1fr 30px 1.5fr;font-size:12px}#quant-guide-prose .qgp-tree svg{width:30px}#quant-guide-prose .qgp-equation{font-size:15px}#quant-guide-prose table.qgp-booktable{display:table}#quant-guide-prose .qgp-booktable thead{display:table-header-group}#quant-guide-prose .qgp-booktable tbody{display:table-row-group}#quant-guide-prose .qgp-booktable tr{display:table-row;border:0}#quant-guide-prose .qgp-booktable th,#quant-guide-prose .qgp-booktable td{display:table-cell;width:25%;font-size:12px;padding:8px 2px;border-bottom:1px solid #ccc}#quant-guide-prose .qgp-booktable td:last-child:before{content:none}#quant-guide-prose .qgp-timeline{grid-template-columns:1fr;gap:17px}#quant-guide-prose .qgp-time-step{border-top:0;border-left:3px solid #000;padding:0 0 0 12px}#quant-guide-prose .qgp-time-step:last-child{border-color:#892736}}
+@media(max-width:580px){#quant-guide-prose{padding:0 20px;font-size:15px}#quant-guide-prose header{align-items:flex-start;font-size:11px}#quant-guide-prose h1{font-size:27px}#quant-guide-prose h2{font-size:22px}#quant-guide-prose table,#quant-guide-prose tbody,#quant-guide-prose tr,#quant-guide-prose td{display:block;width:100%}#quant-guide-prose thead{display:none}#quant-guide-prose tr{padding:12px 0;border-bottom:1px solid #ccc}#quant-guide-prose td{border:0;padding:3px 0}#quant-guide-prose td:first-child{font-size:15px;font-weight:700}#quant-guide-prose td:last-child{padding-top:8px}#quant-guide-prose td:last-child:before{content:'Reference: ';font-size:12px}#quant-guide-prose .qgp-author{display:inline;margin-left:5px}}
+@media(pointer:coarse){#quant-guide-prose nav a,#quant-guide-prose .qgp-subnav a{padding:7px 0}}
+
+.skip-link{position:absolute;left:16px;top:-100px;background:white;color:#892736;padding:12px;z-index:10}.skip-link:focus{top:10px}a:focus-visible,summary:focus-visible{outline:2px solid #892736;outline-offset:4px}#main-content{min-height:50vh}

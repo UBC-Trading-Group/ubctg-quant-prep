@@ -1,105 +1,43 @@
-# UBC Trading Group Quant Prep
+# UBC Trading Group — Quantitative Finance Guide
 
-Public quant interview prep site built with Astro, MDX content collections, React islands, Tailwind CSS, KaTeX, and Pagefind.
+A single-page technical reading guide covering eight subjects and role-specific interview preparation. Published at https://ubc-trading-group.github.io/ubctg-quant-prep/.
 
-## Project Structure
+## Development
 
-```text
-/
-├── src/
-│   ├── components/
-│   │   ├── cards/
-│   │   ├── games/
-│   │   └── shared/
-│   ├── content/
-│   │   ├── concepts/
-│   │   ├── games/
-│   │   └── questions/
-│   ├── layouts/
-│   ├── pages/
-│   ├── styles/
-│   └── content.config.ts
-├── templates/
-├── .github/workflows/deploy.yml
-└── package.json
+Use Node 22.12 or newer.
+
+```sh
+npm ci
+npm run dev
 ```
 
-## Commands
+Open the address printed by Astro, including `/ubctg-quant-prep/`.
 
-| Command | Action |
-| :-- | :-- |
-| `npm install` | Installs dependencies |
-| `npm run dev` | Starts the local dev server |
-| `npm run build` | Builds Astro and indexes `dist/` with Pagefind |
-| `npm run preview` | Serves the production build locally |
-| `npm run astro -- --help` | Shows Astro CLI help |
+```sh
+npm run build
+npm run preview
+```
 
-## Content
+## Editing
 
-Content pages are Markdown or MDX files:
+- `src/guide/`: trusted HTML fragments for the introduction, eight subjects and interview preparation. Edit the text here; they all render on the homepage.
+- `src/pages/index.astro`: reading order and subject-section wrapper.
+- `src/layouts/Page.astro`: document metadata, header and footer.
+- `src/styles/guide.css`: white background, black text and `#892736` accents, including mobile styles.
+- `public/`: favicon and club brand assets.
+- `research/resource-catalog/`: internal research inventory, not published or automatically endorsed.
+- `research/mockups/`: approved design reference; production edits belong in `src/`.
 
-- Concepts: `src/content/concepts`
-- Worked questions: `src/content/questions`
-- Game pages: `src/content/games`
+The site ships static HTML and CSS with no React runtime. The worked example uses native `<details>`. Book covers currently load directly from external sources; their links and alt text remain available if an image fails. Do not replace them with invented covers.
 
-Use the files in `templates/` when starting from scratch. The required frontmatter fields are defined in `src/content.config.ts`.
+## Publishing
 
-### Add a Ready Concept Markdown File
+Pull requests to `main` run the build check. Pushes to `main` build and publish with GitHub Actions. GitHub Pages must use GitHub Actions as its source.
 
-1. Save the file in `src/content/concepts`.
-2. Name it with a URL-safe slug, for example:
+The default canonical origin is `https://ubc-trading-group.github.io` with base `/ubctg-quant-prep`. For a custom domain, set `SITE_URL` and `BASE_PATH` in the build environment and configure the domain in GitHub Pages. Both metadata and generated URLs follow those values. The project-path `robots.txt` is provided for portability; on the shared GitHub Pages origin only the origin-root robots file controls crawling.
 
-   ```text
-   src/content/concepts/law-of-total-probability.md
-   ```
+The former games, questions and concept routes are retired. Unknown URLs use the custom 404, which links to the guide and interview section. The old implementation remains in Git history.
 
-3. Make sure the file starts with this frontmatter shape:
+## Future writing
 
-   ```md
-   ---
-   title: "Law of Total Probability"
-   description: "Break a probability into weighted cases."
-   topic: "Probability"
-   difficulty: "Beginner"
-   tags: ["probability", "conditional probability"]
-   relatedGames: []
-   relatedQuestions: []
-   ---
-   ```
-
-   `difficulty` must be `Beginner`, `Intermediate`, or `Advanced`.
-
-4. Build locally:
-
-   ```bash
-   npm run build
-   ```
-
-5. Commit and push:
-
-   ```bash
-   git add src/content/concepts/law-of-total-probability.md
-   git commit -m "Add law of total probability concept"
-   git push origin main
-   ```
-
-After the push to `main`, GitHub Actions deploys the updated site.
-
-### Draft a Concept From GitHub
-
-Maintainers can also use **Actions -> New Concept Draft** on GitHub. Fill in the title, description, topic, difficulty, and tags. The workflow creates a pull request with a draft concept file, then you can edit the body of the markdown before merging.
-
-Interactive games live in `src/components/games` and are imported by MDX game pages as hydrated React islands.
-
-## Deployment
-
-Deployment is automatic.
-
-When changes are pushed to `main`, `.github/workflows/deploy.yml` builds the Astro site and publishes it to GitHub Pages.
-
-On GitHub, the repository only needs Pages set to **GitHub Actions**:
-
-1. Go to **Settings -> Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-
-For a custom domain or user/organization site, set `BASE_PATH=/` and `SITE_URL=https://your-domain.example` in the workflow environment.
+Add a write-up only when it is ready. Give it its own page, author, date and sources, and link it from the relevant guide section. The shared layout currently sets the homepage canonical; extend it with a page-specific canonical when adding another indexable page. Do not add an empty writing directory to the public navigation.

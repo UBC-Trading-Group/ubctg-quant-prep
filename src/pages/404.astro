@@ -1,0 +1,9 @@
+---
+import Page from '../layouts/Page.astro';
+const home = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+---
+<Page title="Page not found | UBC Trading Group" noindex>
+  <h1>Page not found</h1>
+  <p>The old Quant Prep games and question pages have been retired. This site is now a guide to studying quantitative finance.</p>
+  <p><a href={home}>Read the guide</a> or go directly to <a href={`${home}#qgp-interviews`}>interview preparation</a>.</p>
+</Page>

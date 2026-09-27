@@ -1,0 +1,40 @@
+---
+import '../styles/guide.css';
+interface Props { title?: string; description?: string; noindex?: boolean; }
+const {
+  title = 'A guide to studying quantitative finance | UBC Trading Group',
+  description = 'A technical reading guide to quantitative finance: probability, statistics, pricing, market microstructure, systematic research and interview preparation.',
+  noindex = false,
+} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const canonical = new URL(base, Astro.site);
+const shareImage = new URL(`${base}assets/brand/ubctg-lockup.png`, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#892736" />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UBC Trading Group" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:alt" content="UBC Trading Group" />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div id="quant-guide-prose"><div class="qgp-page">
+      <header id="qgp-top"><a class="qgp-brand" href="https://ubctradinggroup.com">UBC TRADING GROUP</a><span>Quantitative finance resources</span></header>
+      <main id="main-content"><slot /></main>
+      <footer><div class="qgp-bottom"><a href="https://ubctradinggroup.com">About UBC Trading Group</a><a href="#qgp-top">Back to top ↑</a></div></footer>
+    </div></div>
+  </body>
+</html>
