@@ -19,7 +19,8 @@ const shareImage = new URL(`${base}assets/brand/ubctg-lockup.png`, Astro.site);
     <meta name="theme-color" content="#892736" />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="icon" type="image/png" href={`${base}favicon-light.png`} media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href={`${base}favicon-dark.png`} media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="UBC Trading Group" />
     <meta property="og:title" content={title} />
