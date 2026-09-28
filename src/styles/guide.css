@@ -59,7 +59,13 @@ body{margin:0;background:#fff}
 #quant-guide-prose .qgp-time-step strong{display:block;margin-bottom:6px}
 #quant-guide-prose .qgp-time-step span{display:block;font-size:12px;line-height:1.55}
 #quant-guide-prose .qgp-time-direction{text-align:right;margin-top:12px;font-size:12px}
-#quant-guide-prose .qgp-question{clear:both;margin:22px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:15px 0;font-size:14px}
+#quant-guide-prose .qgp-question{clear:both;margin:20px 0;border-left:2px solid #892736;padding:2px 0 2px 14px;font-size:14px;line-height:1.5;max-width:690px}
+#quant-guide-prose .qgp-question h4{font-size:13px;margin:0 0 8px;font-weight:700}
+#quant-guide-prose .qgp-question h4 span{font-weight:400}
+#quant-guide-prose .qgp-question .qgp-question-prompt{margin:0 0 6px}
+#quant-guide-prose .qgp-answer{padding-top:6px}
+#quant-guide-prose .qgp-answer .qgp-answer-equation{font:17px/1.4 Georgia,serif;margin:10px 0;color:#892736}
+#quant-guide-prose .qgp-answer h5{font-size:13px;margin:10px 0 4px}
 #quant-guide-prose .qgp-question p{margin-bottom:9px}
 #quant-guide-prose .qgp-question summary{color:#892736;padding:6px 0;font-size:13px}
 @media(max-width:580px){#quant-guide-prose .qgp-cover{float:none;margin:16px 0 20px;width:95px;text-align:left}#quant-guide-prose .qgp-cover-pair{width:188px}#quant-guide-prose .qgp-cover img{height:140px}#quant-guide-prose .qgp-tree{grid-template-columns:1fr 30px 1.5fr;font-size:12px}#quant-guide-prose .qgp-tree svg{width:30px}#quant-guide-prose .qgp-equation{font-size:15px}#quant-guide-prose table.qgp-booktable{display:table}#quant-guide-prose .qgp-booktable thead{display:table-header-group}#quant-guide-prose .qgp-booktable tbody{display:table-row-group}#quant-guide-prose .qgp-booktable tr{display:table-row;border:0}#quant-guide-prose .qgp-booktable th,#quant-guide-prose .qgp-booktable td{display:table-cell;width:25%;font-size:12px;padding:8px 2px;border-bottom:1px solid #ccc}#quant-guide-prose .qgp-booktable td:last-child:before{content:none}#quant-guide-prose .qgp-timeline{grid-template-columns:1fr;gap:17px}#quant-guide-prose .qgp-time-step{border-top:0;border-left:3px solid #000;padding:0 0 0 12px}#quant-guide-prose .qgp-time-step:last-child{border-color:#892736}}
@@ -67,3 +73,10 @@ body{margin:0;background:#fff}
 @media(pointer:coarse){#quant-guide-prose nav a,#quant-guide-prose .qgp-subnav a{padding:7px 0}}
 
 .skip-link{position:absolute;left:16px;top:-100px;background:white;color:#892736;padding:12px;z-index:10}.skip-link:focus{top:10px}a:focus-visible,summary:focus-visible{outline:2px solid #892736;outline-offset:4px}#main-content{min-height:50vh}
+#quant-guide-prose .qgp-sort-step{font-size:13px;line-height:1.6;text-align:center}
+#quant-guide-prose .qgp-sort-groups{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:540px;margin:18px auto}
+#quant-guide-prose .qgp-sort-groups>div{border:1px solid #aaa;min-height:65px;text-align:center;padding:8px 2px}
+#quant-guide-prose .qgp-sort-groups strong{display:block;font-size:16px;font-weight:400}
+#quant-guide-prose .qgp-sort-groups span{display:block;font-size:11px}
+#quant-guide-prose .qgp-sort-groups>div:first-child,#quant-guide-prose .qgp-sort-groups>div:last-child{border-color:#892736;color:#892736}
+#quant-guide-prose .qgp-sort-spread{text-align:center;color:#892736;font-size:13px;margin-top:14px}
